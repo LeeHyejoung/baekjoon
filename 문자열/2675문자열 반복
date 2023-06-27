@@ -1,0 +1,43 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+struct S{
+	int r;
+	char input[20];
+};
+
+void printChar(int r, char* input) {
+	int i;
+	int j;
+
+	for (i = 0; input[i] != '\0'; i++) {
+		for (j = 0; j < r; j++) {
+			printf("%c", input[i]);
+		}
+	}
+	printf("\n");
+
+	return;
+}
+
+int main(void)
+{
+	struct S* sp;
+	int t;
+	int i;
+	
+	scanf("%d", &t);
+
+	sp = (struct S*)malloc(sizeof(struct S) * t);
+
+	for (i = 0; i < t; i++) {
+		scanf("%d", &sp[i].r);
+		scanf("%s", sp[i].input);
+		printChar(sp[i].r, sp[i].input);
+	}
+
+	free(sp);
+
+	return 0;
+}
