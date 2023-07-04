@@ -1,0 +1,21 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int array[5];
+	int i, sum = 0, result;
+
+	for (i = 0; i < 5; i++) {
+		scanf("%d", &array[i]);
+	}
+
+	for (i = 0; i < 5; i++) {
+		sum += array[i] * array[i];
+	}
+	
+	result = sum % 10;
+	printf("%d\n", result);
+
+	return 0;
+}
