@@ -1,0 +1,39 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int powB(int b, int digit) {
+	int i;
+	int result = 1;
+
+	for (i = 0; i < digit; i++) {
+		result *= b;
+	}
+
+	return result;
+}
+
+int main(void)
+{
+	char n[100];
+	int b;
+	int i, len, powed;
+	int sum = 0, count = 0;
+
+	scanf("%s %d", n, &b);
+
+	for (i = 0; n[i] != '\0'; i++);
+	len = i;
+	
+	for (i = len - 1; i >= 0; i--) {
+		powed = powB(b, count);
+
+		if (n[i] >= 'A' && n[i] <= 'Z')
+			sum += (n[i] - 'A' + 10) * powed;
+		else
+			sum += (n[i] - '0') * powed;
+		count++;
+	}
+	printf("%d\n", sum);
+
+	return 0;
+}
