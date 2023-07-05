@@ -1,0 +1,29 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int t;
+	char answer[81];
+	int count = 0, i, j, sum = 0;
+
+	scanf("%d", &t);
+
+	for (i = 0; i < t; i++) {
+		scanf("%s", answer);
+
+		sum = 0;
+		count = 0;
+		for (j = 0; answer[j] != '\0'; j++) {
+			if (answer[j] == 'X')
+				count = 0;
+			else if (answer[j] == 'O')
+				count++;
+
+			sum += count;
+		}
+		printf("%d\n", sum);
+	}
+
+	return 0;
+}
