@@ -1,0 +1,59 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+	int n, m;
+	int k;
+	int i, j, x, y;
+	int** matrix;
+	int row, col, count;
+	int result;
+	int** sums;
+	int sum = 0;
+
+	scanf("%d %d", &n, &m);
+	matrix = (int**)malloc(sizeof(int*) * n);
+	sums = (int**)malloc(sizeof(int*) * n);
+	for (row = 0; row < n; row++) {
+		matrix[row] = (int*)malloc(sizeof(int) * m);
+		sums[row] = (int*)malloc(sizeof(int) * m);
+	}
+
+	for (row = 0; row < n; row++) {
+		sum = 0;
+		for (col = 0; col < m; col++) {
+			scanf("%d", &matrix[row][col]);
+			sum += matrix[row][col];
+			sums[row][col] = sum;
+		}
+	}
+
+	scanf("%d", &k);
+
+	for (count = 0; count < k; count++) {
+		scanf("%d %d %d %d", &i, &j, &x, &y);
+	
+		result = 0;
+		for (row = i - 1; row < x; row++) {
+			if (j == 1) {
+				result += sums[row][y - 1];
+			}
+			else {
+				result += sums[row][y - 1] - sums[row][j - 2];
+			}
+		}
+
+		printf("%d\n", result);
+	}
+
+	for (row = 0; row < n; row++) {
+		free(matrix[row]);
+		free(sums[row]);
+	}
+	free(matrix);
+	free(sums);
+
+	return 0;
+}
