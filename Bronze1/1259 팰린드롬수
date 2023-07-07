@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int isPal(char* s) {
+	int i, len;
+
+	for (i = 0; s[i] != '\0'; i++);
+	len = i;
+
+	for (i = 0; i < len / 2; i++) {
+		if (s[i] != s[len - i - 1]) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int main(void)
+{
+	char s[6];
+	int result;
+
+	do {
+		scanf("%s", s);
+		if (s[0] == '0')
+			break;
+
+		result = isPal(s);
+
+		if (result) {
+			printf("yes\n");
+		}
+		else {
+			printf("no\n");
+		}
+
+	} while (s[0] != '0');
+
+	return 0;
+}
