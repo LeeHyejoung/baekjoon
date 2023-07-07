@@ -1,0 +1,30 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int array[1000];
+	int i, j;
+	int count = 1, sum = 0;
+	int a, b;
+
+	for (i = 0; i < 1000; ) {
+		for (j = 0; j < count; j++) {
+			if (i + j >= 1000)
+				break;
+			array[i + j] = count;
+		}
+		i += count;
+		count++;
+	}
+
+	scanf("%d %d", &a, &b);
+
+	for (i = a - 1; i < b; i++) {
+		sum += array[i];
+	}
+
+	printf("%d\n", sum);
+
+	return 0;
+}
