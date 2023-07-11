@@ -1,0 +1,34 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int change(int n) {
+	int result = 0;
+
+	while (n > 0) {
+		result *= 10;
+		result += n % 10;
+		n /= 10;
+	}
+
+	return result;
+}
+
+int main(void)
+{
+	int a, b;
+	int changedA, changedB, big;
+
+	scanf("%d %d", &a, &b);
+
+	changedA = change(a);
+	changedB = change(b);
+
+	if (changedA > changedB)
+		big = changedA;
+	else
+		big = changedB;
+
+	printf("%d\n", big);
+
+	return 0;
+}
