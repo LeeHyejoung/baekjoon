@@ -1,0 +1,45 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int x, y, w, h;
+	int x2, y2, xresult, yresult, result;
+
+	scanf("%d %d %d %d", &x, &y, &w, &h);
+
+	if (w > x) {
+		x2 = w - x;
+	}
+	else {
+		x2 = x - w;
+	}
+	xresult = x2;
+
+	if (x2 > x) {
+		xresult = x;
+	}
+
+	if (h > y) {
+		y2 = h - y;
+	}
+	else {
+		y2 = y - h;
+	}
+	yresult = y2;
+
+	if (y2 > y) {
+		yresult = y;
+	}
+
+	if (xresult < yresult) {
+		result = xresult;
+	}
+	else {
+		result = yresult;
+	}
+
+	printf("%d\n", result);
+
+	return 0;
+}
