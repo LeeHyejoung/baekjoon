@@ -1,0 +1,23 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+char a[10000];
+char b[10000];
+
+int main(void)
+{
+	int i, j;
+	long long result = 0;
+
+	scanf("%s %s", a, b);
+
+	for (i = 0; a[i] != '\0'; i++) {
+		for (j = 0; b[j] != '\0'; j++) {
+			result += (a[i] - '0') * (b[j] - '0');
+		}
+	}
+
+	printf("%lld\n", result);
+
+	return 0;
+}
