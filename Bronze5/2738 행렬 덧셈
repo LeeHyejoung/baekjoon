@@ -1,0 +1,61 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+	int n, m;
+	int** a;
+	int** b;
+	int** c;
+	int i, j;
+
+	scanf("%d %d", &n, &m);
+
+	a = (int**)malloc(sizeof(int*) * n);
+	b = (int**)malloc(sizeof(int*) * n);
+	c = (int**)malloc(sizeof(int*) * n);
+
+	for (i = 0; i < n; i++) {
+		a[i] = (int*)malloc(sizeof(int) * m);
+		b[i] = (int*)malloc(sizeof(int) * m);
+		c[i] = (int*)malloc(sizeof(int) * m);
+	}
+
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < m; j++) {
+			scanf("%d", &a[i][j]);
+		}
+	}
+
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < m; j++) {
+			scanf("%d", &b[i][j]);
+		}
+	}
+
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < m; j++) {
+			c[i][j] = a[i][j] + b[i][j];
+		}
+	}
+
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < m; j++) {
+			printf("%d ", c[i][j]);
+		}
+		printf("\n");
+	}
+
+	for (i = 0; i < n; i++) {
+		free(a[i]);
+		free(b[i]);
+		free(c[i]);
+	}
+
+	free(a);
+	free(b);
+	free(c);
+
+	return 0;
+}
