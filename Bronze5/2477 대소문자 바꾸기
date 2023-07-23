@@ -1,0 +1,25 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	char input[101];
+	char result;
+	int i;
+
+	scanf("%s", input);
+
+	for (i = 0; input[i] != '\0'; i++) {
+		if (input[i] >= 'a' && input[i] <= 'z') {
+			result = input[i] - 32;
+		}
+		else {
+			result = input[i] + 32;
+		}
+		printf("%c", result);
+	}
+
+	printf("\n");
+
+	return 0;
+}
