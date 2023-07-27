@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int cal[12][31] = { -1 };
+	int x, y;
+	int i, j, day, finalDay;
+	char *result[7] = { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
+
+	scanf("%d %d", &x, &y);
+
+	day = 0;
+	for (i = 0; i < 12; i++) {
+		if (i == 3 || i == 5 || i == 8 || i == 10) {
+			finalDay = 30;
+		}
+		else if (i == 1) {
+			finalDay = 28;
+		}
+		else {
+			finalDay = 31;
+		}
+		for (j = 0; j < finalDay; j++) {
+			cal[i][j] = day++;
+		}
+	}
+
+	printf("%s\n", result[cal[x - 1][y - 1] % 7]);
+
+	return 0;
+}
