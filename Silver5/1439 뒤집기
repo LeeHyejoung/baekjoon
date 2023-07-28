@@ -1,0 +1,22 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+char input[1000000];
+
+int main(void)
+{
+	int i, count = 0;
+	char first;
+
+	scanf("%s", input);
+
+	first = input[0];
+	for (i = 1; input[i] != '\0'; i++) {
+		if (input[i - 1] != input[i] && input[i] != first) {
+			count++;
+		}
+	}
+	printf("%d\n", count);
+
+	return 0;
+}
