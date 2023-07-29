@@ -1,0 +1,25 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+	int n;
+	int* array;
+	int i, result = 0;
+
+	scanf("%d", &n);
+	array = (int*)malloc(sizeof(int) * n);
+
+	for (i = 0; i < n; i++) {
+		scanf("%d", &array[i]);
+		result += array[i] - 1;
+	}
+	result++;
+
+	printf("%d\n", result);
+
+	free(array);
+
+	return 0;
+}
