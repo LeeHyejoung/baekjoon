@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int input[3];
+	int i, max, min;
+
+	for (i = 0; i < 3; i++) {
+		scanf("%d", &input[i]);
+	}
+
+	max = 0;
+	min = 1000000;
+	for (i = 0; i < 3; i++) {
+		if (input[i] > max)
+			max = input[i];
+		if (input[i] < min)
+			min = input[i];
+	}
+
+	printf("%d ", min);
+
+	for (i = 0; i < 3; i++) {
+		if (input[i] != min && input[i] != max)
+			printf("%d ", input[i]);
+	}
+
+	printf("%d\n", max);
+
+	return 0;
+}
