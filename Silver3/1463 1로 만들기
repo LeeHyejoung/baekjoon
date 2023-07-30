@@ -1,0 +1,64 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int min = 0;
+
+void pick(int n, int* bucket, int bucketSize, int toPick, int curNum);
+
+int main(void)
+{
+	int x;
+	int* bucket;
+
+	scanf("%d", &x);
+
+	min = x - 1;
+	bucket = (int*)malloc(sizeof(int) * (x - 1));
+	pick(3, bucket, x - 1, x - 1, x);
+
+	printf("%d\n", min);
+
+	free(bucket);
+
+	return 0;
+}
+
+void pick(int n, int* bucket, int bucketSize, int toPick, int curNum) {
+	int i, smallest, lastIndex, count;
+	
+	if (toPick == 0) {
+		return;
+	}
+	else {
+		lastIndex = bucketSize - toPick - 1;
+		count = bucketSize - toPick;
+		if (curNum == 1) {
+			if (count < min) {
+				min = count;
+			}
+			return;
+		}
+		if (curNum < 1) {
+			return;
+		}
+		if (count > min) {
+			return;
+		}
+
+		for (i = 0; i < n; i++) {
+			if (i == 0 && curNum % 3 == 0) {
+				bucket[lastIndex + 1] = i;
+				pick(n, bucket, bucketSize, toPick - 1, curNum / 3);
+			}
+			if (i == 1 && curNum % 2 == 0) {
+				bucket[lastIndex + 1] = i;
+				pick(n, bucket, bucketSize, toPick - 1, curNum / 2);
+			}			
+			if (i == 2) {
+				bucket[lastIndex + 1] = i;
+				pick(n, bucket, bucketSize, toPick - 1, curNum - 1);
+			}
+		}
+	}
+}
