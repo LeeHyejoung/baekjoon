@@ -1,0 +1,38 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int compare(const int* a, const int* b) {
+	return(*a - *b);
+}
+
+int main(void)
+{
+	int n;
+	int i, result = 0;
+	int* a, * b;
+
+	scanf("%d", &n);
+
+	a = (int*)malloc(sizeof(int) * n);
+	b = (int*)malloc(sizeof(int) * n);
+
+	for (i = 0; i < n; i++) {
+		scanf("%d", &a[i]);
+	}
+	
+	for (i = 0; i < n; i++) {
+		scanf("%d", &b[i]);
+	}
+
+	qsort(a, n, sizeof(int), compare);
+	qsort(b, n, sizeof(int), compare);
+
+	for (i = 0; i < n; i++) {
+		result += a[i] * b[n - i - 1];
+	}
+
+	printf("%d\n", result);
+
+	return 0;
+}
