@@ -1,0 +1,33 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int l, p, v;
+	int count = 1, result, tmp;
+	
+	while (1) {
+		result = 0;
+
+		scanf("%d %d %d", &l, &p, &v);
+
+		if (l == 0 && p == 0 && v == 0) {
+			break;
+		}
+
+		tmp = v / p;
+		result += tmp * l;
+
+		if (v - tmp * p > l) {
+			result += l;
+		}
+		else {
+			result += v - tmp * p;
+		}
+		printf("Case %d: %d\n", count, result);
+
+		count++;
+	}
+
+	return 0;
+}
