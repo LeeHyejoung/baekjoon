@@ -1,0 +1,52 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int solution(int n) {
+	int i, count = 0, d;
+	int* array;
+
+	i = n;
+	while (i > 0) {
+		i /= 10;
+		count++;
+	}
+
+	array = (int*)malloc(sizeof(int) * count);
+
+	for (i = count - 1; i >= 0; i--) {
+		array[i] = n % 10;
+		n /= 10;
+	}
+
+	d = array[0] - array[1];
+	for (i = 1; i < count - 1; i++) {
+		if (array[i] - array[i + 1] != d) {
+			free(array);
+			return 0;
+		}
+	}
+
+	free(array);
+
+	return 1;
+}
+
+int main(void)
+{
+	int n;
+	int i, count = 0;
+	int result;
+
+	scanf("%d", &n);
+
+	for (i = n; i > 0; i--) {
+		if (result = solution(i) == 1) {
+			count++;
+		}
+	}
+
+	printf("%d\n", count);
+
+	return 0;
+}
