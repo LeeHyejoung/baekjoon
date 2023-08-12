@@ -1,0 +1,39 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int fib(int n, int* memo) {
+	if (memo[n] != -1) {
+		return memo[n];
+	}
+	if (n == 0) {
+		return 0;
+	}
+	else if (n == 1) {
+		return 1;
+	}
+	else {
+		memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+		return memo[n];
+	}
+}
+
+int main(void)
+{
+	int n, result, i;
+	int* memo;
+
+	scanf("%d", &n);
+	memo = (int*)malloc(sizeof(int) * (n + 1));
+
+	for (i = 0; i <= n; i++) {
+		memo[i] = -1;
+	}
+
+	result = fib(n, memo);
+	printf("%d\n", result);
+
+	free(memo);
+
+	return 0;
+}
