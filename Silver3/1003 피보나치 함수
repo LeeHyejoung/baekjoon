@@ -1,0 +1,60 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+int fib(int n, int* memo, int* memo0, int* memo1, int aim) {
+	if (memo[n] != -1) {
+		//memo0[n] += memo0[n - 1];
+		//memo1[n] += memo1[n - 1];
+		return memo[n];
+	}
+	if (n == 0) {
+		memo0[n] = 1;
+		return 0;
+	}
+	else if (n == 1) {
+		memo1[n] = 1;
+		return 1;
+	}
+	else {
+		memo[n] = fib(n - 1, memo, memo0, memo1, aim) + fib(n - 2, memo, memo0, memo1, aim);
+
+		memo0[n] += memo0[n - 1] + memo0[n - 2];
+		memo1[n] += memo1[n - 1] + memo1[n - 2];
+
+		return memo[n];
+	}
+}
+
+int main(void)
+{
+	int n, t, result, i;
+	int* memo;
+	int* memo0;
+	int* memo1;
+
+	scanf("%d", &t);
+	
+	memo = (int*)malloc(sizeof(int) * (42));
+	memo0 = (int*)malloc(sizeof(int) * (42));
+	memo1 = (int*)malloc(sizeof(int) * (42));
+
+	for (i = 0; i <= 41; i++) {
+		memo[i] = -1;
+		memo0[i] = 0;
+		memo1[i] = 0;
+	}
+
+	for (i = 0; i < t; i++) {
+		scanf("%d", &n);
+		
+		result = fib(n, memo, memo0, memo1, n);
+		printf("%d %d\n", memo0[n], memo1[n]);
+	}
+
+	free(memo);
+	free(memo0);
+	free(memo1);
+
+	return 0;
+}
