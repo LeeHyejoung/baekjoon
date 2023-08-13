@@ -1,0 +1,38 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int x;
+	int i, j, count;
+
+	scanf("%d", &x);
+
+	j = 1;
+	for (count = 0; count < x;) {
+		if (j % 2 == 0) {
+			for (i = 0; i < j; i++) {
+				count++;
+
+				if (count == x) {
+					printf("%d/%d\n", i + 1, j - i);
+					break;
+				}
+			}
+		}
+		else {
+			for (i = 0; i < j; i++) {
+				count++;
+
+				if (count == x) {
+					printf("%d/%d\n", j - i, i + 1);
+					break;
+				}
+			}
+		}
+		
+		j++;
+	}
+
+	return 0;
+}
