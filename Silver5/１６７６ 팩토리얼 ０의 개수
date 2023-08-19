@@ -1,0 +1,45 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int n, count = 0, count5 = 0;
+	int tmp;
+
+	scanf("%d", &n);
+
+	while (n > 0) {
+		tmp = n;
+		if (tmp % 100 == 0) {
+			count += 2;
+			tmp /= 100;
+
+			if (tmp % 5 == 0) {
+				count5++;
+			}
+		}
+		else if (n % 10 == 0) {
+			count++;
+			tmp = n / 10;
+
+			if (tmp % 5 == 0) {
+				while (tmp > 0 && tmp % 5 == 0) {
+					count5++;
+					tmp /= 5;
+				}
+			}
+		}
+		else if (n % 5 == 0) {
+			while (tmp > 0 && tmp % 5 == 0) {
+				count5++;
+				tmp /= 5;
+			}
+		}
+
+		n--;
+	}
+
+	printf("%d\n", count + count5);
+
+	return 0;
+}
