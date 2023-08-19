@@ -1,0 +1,43 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int stick[64] = { 0 };
+	int i, x, sum = 0, size = 1, tmp;
+
+	scanf("%d", &x);
+	stick[0] = 64;
+
+	while (sum != x) {
+		sum = 0;
+
+		for (i = 0; i < size; i++) {
+			sum += stick[i];
+		}
+
+		if (sum == x) {
+			break;
+		}
+
+		tmp = stick[size - 1] / 2;
+		for (i = size - 1; i < size + 2; i++) {
+			stick[i] = tmp;
+		}
+
+		sum = 0;
+		for (i = 0; i < size; i++) {
+			sum += stick[i];
+		}
+		if (sum >= x) {
+			stick[size] = 0;
+		}
+		else {
+			size++;
+		}
+	}
+
+	printf("%d\n", size);
+
+	return 0;
+}
