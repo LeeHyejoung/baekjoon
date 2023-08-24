@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+char n[1000000];
+
+int main(void)
+{
+	int i, max = 0;
+	int num[10] = { 0 };
+	
+	scanf("%s", n);
+
+	for (i = 0; n[i] != '\0'; i++) {
+		num[n[i] - '0']++;
+	}
+	
+	while (1) {
+		if (num[6] == num[9] || num[6] - num[9] == 1 || num[6] - num[9] == -1) {
+			break;
+		}
+
+		if (num[6] > num[9]) {
+			num[6]--;
+			num[9]++;
+		}
+		else {
+			num[6]++;
+			num[9]--;
+		}
+	}
+
+	for (i = 0; i < 10; i++) {
+		if (num[i] > max) {
+			max = num[i];
+		}
+	}
+	printf("%d\n", max);
+
+	return 0;
+}
