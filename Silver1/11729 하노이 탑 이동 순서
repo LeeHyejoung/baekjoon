@@ -1,0 +1,45 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int count = 0;
+
+void hanoi(int n, int from, int tmp, int to) {
+	if (n == 1) {
+		count++;
+		return;
+	}
+	else {
+		hanoi(n - 1, from, to, tmp);
+
+		count++;
+
+		hanoi(n - 1, tmp, from, to);
+	}	
+}
+
+void hanoiPrint(int n, int from, int tmp, int to) {
+	if (n == 1) {
+		printf("%d %d\n", from, to);
+		return;
+	}
+	else {
+		hanoiPrint(n - 1, from, to, tmp);
+
+		printf("%d %d\n", from, to);
+
+		hanoiPrint(n - 1, tmp, from, to);
+	}
+}
+
+int main(void)
+{
+	int n;
+	
+	scanf("%d", &n);
+
+	hanoi(n, 1, 2, 3);
+	printf("%d\n", count);
+	hanoiPrint(n, 1, 2, 3);
+
+	return 0;
+}
