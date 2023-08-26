@@ -1,0 +1,64 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct student {
+	int korean, english, math;
+	char name[11];
+}typedef Student;
+
+int compare(const Student* a, Student* b) {
+	if (a->korean < b->korean) {
+		return 1;
+	}
+	else if (a->korean == b->korean) {
+		if (a->english > b->english) {
+			return 1;
+		}
+		else if (a->english == b->english) {
+			if (a->math < b->math) {
+				return 1;
+			}
+			else if (a->math == b->math) {
+				if (strcmp(a->name, b->name) > 0) {
+					return 1;
+				}
+			}
+			else {
+				return -1;
+			}
+		}
+		else {
+			return -1;
+		}
+	}
+	else {
+		return -1;
+	}
+	return -1;
+}
+
+int main(void)
+{
+	int n;
+	int i;
+	Student* input;
+
+	scanf("%d", &n);
+	input = (Student*)malloc(sizeof(Student) * n);
+
+	for (i = 0; i < n; i++) {
+		scanf("%s %d %d %d", input[i].name, &input[i].korean, &input[i].english, &input[i].math);
+	}
+
+	qsort(input, n, sizeof(Student), compare);
+
+	for (i = 0; i < n; i++) {
+		printf("%s\n", input[i].name);
+	}
+	
+	free(input);
+
+	return 0;
+}
