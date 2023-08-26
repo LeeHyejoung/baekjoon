@@ -1,0 +1,24 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int compare(char* a, char* b) {
+	if (*a < *b) {
+		return 1;
+	}
+	else {
+		return -1;
+	}
+}
+
+int main(void)
+{
+	char n[11];
+
+	scanf("%s", n);
+	qsort(n, strlen(n), sizeof(char), compare);
+	printf("%s\n", n);
+
+	return 0;
+}
