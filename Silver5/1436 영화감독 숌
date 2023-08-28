@@ -1,0 +1,28 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int n;
+	int i;
+	int result = 0, tmp;
+
+	scanf("%d", &n);
+
+	i = 0;
+	while (i < n) {
+		result++;
+
+		tmp = result;
+		while (tmp) {
+			if (tmp % 1000 == 666) {
+				i++;
+				break;
+			}
+			tmp /= 10;
+		}
+	}
+	printf("%d\n", result);
+
+	return 0;
+}
