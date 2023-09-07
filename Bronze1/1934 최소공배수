@@ -1,0 +1,42 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int gcd(int n, int m) {
+	int l;
+
+	l = n % m;
+	while (1) {
+		l = n % m;
+
+		if (l == 0) {
+			return m;
+		}
+		n = m;
+		m = l;
+	}
+
+	return m;
+}
+
+int solution(int a, int b) {
+	int i;
+
+	return a * b / gcd(a, b);
+}
+
+int main(Void)
+{
+	int t, a, b;
+	int i, result;
+
+	scanf("%d", &t);
+
+	for (i = 0; i < t; i++) {
+		scanf("%d %d", &a, &b);
+
+		result = solution(a, b);
+		printf("%d\n", result);
+	}
+
+	return 0;
+}
