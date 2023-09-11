@@ -1,0 +1,96 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef int element;
+
+typedef struct {
+	element data[10000];
+	int top;
+}Stack;
+
+void initStack(Stack* s) {
+	s->top = -1;
+
+	return;
+}
+
+int empty(Stack* s) {
+	return (s->top == -1);
+}
+
+int full(Stack* s) {
+	return (s->top == 10000 - 1);
+}
+
+void push(Stack* s, element item) {
+	s->data[++(s->top)] = item;
+
+	return;
+}
+
+element pop(Stack* s) {
+	if (empty(s)) {
+		return -1;
+	}
+	else {
+		return (s->data[(s->top)--]);
+	}
+}
+
+element top(Stack* s) {
+	if (empty(s)) {
+		return -1;
+	}
+	else {
+		return (s->data[s->top]);
+	}
+}
+
+int size(Stack* s) {
+	return s->top + 1;
+}
+
+int main(void)
+{
+	int n;
+	int i, result;
+	element item;
+	char input[6];
+
+	Stack* s = (Stack*)malloc(sizeof(Stack) * 100);
+	
+	initStack(s);
+
+	scanf("%d", &n);
+
+	for (i = 0; i < n; i++) {
+		scanf("%s", input);
+
+		if (strcmp(input, "push") == 0) {
+			scanf("%d", &item);
+			push(s, item);
+		}
+		else if (strcmp(input, "pop") == 0) {
+			item = pop(s);
+			printf("%d\n", item);
+		}
+		else if (strcmp(input, "size") == 0) {
+			result = size(s);
+			printf("%d\n", result);
+		}
+		else if (strcmp(input, "empty") == 0) {
+			result = empty(s);
+			printf("%d\n", result);
+		}
+		else if (strcmp(input, "top") == 0) {
+			item = top(s);
+			printf("%d\n", item);
+		}
+	}
+
+	free(s);
+
+	return 0;
+}
