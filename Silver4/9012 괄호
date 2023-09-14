@@ -1,0 +1,100 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_STACK_SIZE 100
+
+typedef char element;
+
+typedef struct {
+	element data[MAX_STACK_SIZE];
+	int top;
+}StackType;
+
+void init(StackType* s) {
+	s->top = -1;
+
+	return;
+}
+
+int is_full(StackType* s) {
+	return (s->top == MAX_STACK_SIZE - 1);
+}
+
+int is_empty(StackType* s) {
+	return (s->top == -1);
+}
+
+void push(StackType* s, element item) {
+	if (is_full(s)) {
+		printf("스택 포화 에러\n");
+		return;
+	}
+	else {
+		s->data[++(s->top)] = item;
+	}
+
+	return;
+}
+
+element pop(StackType* s) {
+	if (is_empty(s)) {
+		exit(1);
+	}
+
+	return (s->data[(s->top)--]);
+}
+
+element peek(StackType* s) {
+	if (is_empty(s)) {
+		exit(1);
+	}
+
+	return (s->data[s->top]);
+}
+
+int main(void)
+{
+	StackType s;
+
+	int t, i, j, result;
+	char input[51];
+	char ch;
+
+	scanf("%d", &t);
+
+	for (i = 0; i < t; i++) {
+		init(&s);
+		scanf("%s", input);
+		result = 1;
+
+		for (j = 0; input[j] != '\0'; j++) {
+			if (input[j] == '(') {
+				push(&s, input[j]);
+			}
+			else if (input[j] == ')') {
+				if (is_empty(&s)) {
+					result = 0;
+					break;
+				}
+				ch = pop(&s);
+				if (ch != '(') {
+					result = 0;
+					break;
+				}
+			}
+		}
+		if (!is_empty(&s)) {
+			result = 0;
+		}
+
+		if (result == 1) {
+			printf("YES\n");
+		}
+		else {
+			printf("NO\n");
+		}
+	}
+
+	return 0;
+}
