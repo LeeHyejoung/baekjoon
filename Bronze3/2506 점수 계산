@@ -1,0 +1,29 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int n;
+	int i, count = 0, result = 0;
+	int score[100];
+
+	scanf("%d", &n);
+
+	for (i = 0; i < n; i++) {
+		scanf("%d", &score[i]);
+	}
+
+	for (i = 0; i < n; i++) {
+		if (score[i] == 0) {
+			count = 0;
+		}
+		else {
+			count++;
+		}
+		result += count;
+	}
+
+	printf("%d\n", result);
+
+	return 0;
+}
