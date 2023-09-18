@@ -1,0 +1,114 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_QUEUE_SIZE 1000
+
+typedef int element;
+
+typedef struct {
+	element data[MAX_QUEUE_SIZE];
+	int rear, front;
+}QueueType;
+
+void initQueue(QueueType* q) {
+	q->front = q->rear = 0;
+
+	return;
+}
+
+int full(QueueType* q) {
+	return (q->front == (q->rear + 1) % MAX_QUEUE_SIZE);
+}
+
+int empty(QueueType* q) {
+	return (q->front == q->rear);
+}
+
+int size(QueueType* q) {
+	return ((q->rear - q->front + MAX_QUEUE_SIZE) % MAX_QUEUE_SIZE);
+}
+
+int push(QueueType* q, element item) {
+	if (full(q)) {
+		return -1;
+	}
+	else {
+		q->rear = (q->rear + 1) % MAX_QUEUE_SIZE;
+		q->data[q->rear] = item;
+
+		return 1;
+	}
+}
+
+element pop(QueueType* q) {
+	if (empty(q)) {
+		return -1;
+	}
+	else {
+		q->front = (q->front + 1) % MAX_QUEUE_SIZE;
+		return (q->data[q->front]);
+	}
+}
+
+element front(QueueType* q) {
+	if (empty(q)) {
+		return -1;
+	}
+	else {
+		return (q->data[(q->front + 1) % MAX_QUEUE_SIZE]);
+	}
+}
+
+element back(QueueType* q) {
+	if (empty(q)) {
+		return -1;
+	}
+	else {
+		return (q->data[q->rear]);
+	}
+}
+
+int main(void)
+{
+	QueueType q;
+	int n;
+	int i, pushFlag = 0;
+	char inst[10];
+	element item, result = 0;
+
+	initQueue(&q);
+	scanf("%d", &n);
+
+	for (i = 0; i < n; i++) {
+		scanf("%s", inst);
+
+		if (strcmp(inst, "push") == 0) {
+			scanf("%d", &item);
+			push(&q, item);
+			pushFlag = 1;
+		}
+		else if (strcmp(inst, "pop") == 0) {
+			result = pop(&q);
+		}
+		else if (strcmp(inst, "size") == 0) {
+			result = size(&q);
+		}
+		else if (strcmp(inst, "empty") == 0) {
+			result = empty(&q);
+		}
+		else if (strcmp(inst, "front") == 0) {
+			result = front(&q);
+		}
+		else if (strcmp(inst, "back") == 0) {
+			result = back(&q);
+		}
+
+		if (!pushFlag)
+			printf("%d\n", result);
+
+		pushFlag = 0;
+	}
+
+	return 0;
+}
