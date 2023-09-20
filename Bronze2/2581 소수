@@ -1,0 +1,38 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	int m, n;
+	int i, j;
+	int sum = 0, min = 20000, prime = 1;
+
+	scanf("%d", &m);
+	scanf("%d", &n);
+
+	for (i = m; i <= n; i++) {
+		prime = 1;
+		for (j = 2; j < i; j++) {
+			if (i % j == 0) {
+				prime = 0;
+				break;
+			}
+		}
+
+		if (prime && i != 1) {
+			sum += i;
+			if (min > i) {
+				min = i;
+			}
+		}
+	}
+
+	if (sum == 0) {
+		printf("-1\n");
+	}
+	else {
+		printf("%d\n%d\n", sum, min);
+	}
+
+	return 0;
+}
