@@ -1,0 +1,21 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main(void)
+{
+	long long n, m;
+	long long result;
+
+	scanf("%lld %lld", &n, &m);
+
+	if (n < m) {
+		result = m - n;
+	}
+	else {
+		result = n - m;
+	}
+
+	printf("%lld\n", result);
+
+	return 0;
+}
