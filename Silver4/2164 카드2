@@ -1,0 +1,83 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+#define MAX_QUEUE_SIZE 600000
+
+typedef int element;
+
+typedef struct {
+	element array[MAX_QUEUE_SIZE];
+	int front, rear;
+} QueueType;
+
+QueueType q;
+
+void init(QueueType* q) {
+	q->front = q->rear = 0;
+
+	return;
+}
+
+int is_empty(QueueType* q) {
+	return (q->front == q->rear);
+}
+
+int is_full(QueueType* q) {
+	return (q->front == (q->rear + 1) % MAX_QUEUE_SIZE);
+}
+
+void enqueue(QueueType* q, element item) {
+	if (!is_full(q)) {
+		q->rear = (q->rear + 1) % MAX_QUEUE_SIZE;
+		q->array[q->rear] = item;
+	}
+
+	return;
+}
+
+element dequeue(QueueType* q) {
+	if (!is_empty(q)) {
+		q->front = (q->front + 1) % MAX_QUEUE_SIZE;
+		return (q->array[q->front]);
+	}
+}
+
+element peek(QueueType* q) {
+	if (!is_empty(q)) {
+		return (q->array[(q->front + 1) % MAX_QUEUE_SIZE]);
+	}
+}
+
+int get_queue_count(QueueType* q) {
+	return ((q->rear - q->front + MAX_QUEUE_SIZE) % MAX_QUEUE_SIZE);
+}
+
+int main(void)
+{
+	int n;
+	int i;
+	element return_value;
+
+	init(&q);
+
+	scanf("%d", &n);
+	
+	for (i = 0; i < n; i++) {
+		enqueue(&q, i + 1);
+	}
+
+	while (get_queue_count(&q) > 1) {
+		dequeue(&q);
+
+		if (get_queue_count(&q) == 1) {
+			break;
+		}
+
+		return_value = dequeue(&q);
+		enqueue(&q, return_value);
+	}
+
+	printf("%d\n", dequeue(&q));
+
+	return 0;
+}
