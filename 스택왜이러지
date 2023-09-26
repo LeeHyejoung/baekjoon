@@ -1,0 +1,101 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_STACK_SIZE 100001
+
+typedef int element;
+
+typedef struct {
+	element data[MAX_STACK_SIZE];
+	int top;
+} StackType;
+
+void init(StackType* s) {
+	s->top = -1;
+}
+
+int is_empty(StackType* s) {
+	return (s->top == -1);
+}
+
+int is_full(StackType* s) {
+	return (s->top == MAX_STACK_SIZE - 1);
+}
+
+void push(StackType* s, element item) {
+	if (!is_full(s)) {
+		s->data[++(s->top)] = item;
+		return;
+	}
+}
+
+element pop(StackType* s) {
+	if (!is_empty(s)) {
+		return (s->data[(s->top)--]);
+	}
+}
+
+element peek(StackType* s) {
+	if (!is_empty(s)) {
+		return (s->data[s->top]);
+	}
+}
+
+int getCount(StackType* s) {
+	return (s->top + 1);
+}
+
+void printStack(StackType* s) {
+	for (int i = 0; i <= s->top; i++) {
+		printf("%d ", s->data[i]);
+	}
+	return;
+}
+
+int main(void)
+{
+	int n;
+	int i, j, count = 0;
+	StackType* sequence_s = (StackType*)malloc(sizeof(StackType));
+	StackType* s = (StackType*)malloc(sizeof(StackType));
+	element item = 1;
+	int* array;
+
+	init(sequence_s);
+	init(s);
+
+	scanf("%d", &n);
+	array = (int*)malloc(sizeof(int) * n);
+
+	for (i = 0; i < n; i++) {
+		scanf("%d", &array[i]);
+	}
+
+	i = 0;
+	item = 1;
+	while (i != n) {
+		//printStack(sequence_s);
+		if (peek(sequence_s) == array[i]) {
+			pop(sequence_s);
+			printf("-\n");
+			i++;
+		}
+		else {
+			push(sequence_s, item);
+			printf("+\n");
+			item++;
+		}
+		if (item > n) {
+			printf("NO\n");
+			break;
+		}
+	}
+
+
+	free(sequence_s);
+	free(s);
+	free(array);
+
+	return 0;
+}
