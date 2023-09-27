@@ -1,0 +1,84 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+char a[10050], b[10050], result[10050];
+
+int main(void)
+{
+	int i, j, carry = 0, sum;
+	int aLength, bLength;
+	int big, small;
+	int flag = 1;
+
+	scanf("%s %s", a, b);
+
+	aLength = strlen(a);
+	bLength = strlen(b);
+
+	if (aLength > bLength) {
+		big = aLength - 1;
+		small = bLength - 1;
+		for (i = 0; i < aLength; i++) {
+			if (b[small - i] == '\0') {
+				sum = a[big - i] - '0' + carry;
+			}
+			else {
+				sum = a[big - i] - '0' + b[small - i] - '0' + carry;
+			}
+			
+			if (sum >= 10) {
+				carry = 1;
+			}
+			else {
+				carry = 0;
+			}
+			result[i] = sum % 10 + '0';
+		}
+	}
+	else {
+		small = aLength - 1;
+		big = bLength - 1;
+		for (i = 0; i < bLength; i++) {
+			if (a[small - i] == '\0') {
+				sum = b[big - i] - '0' + carry;
+			}
+			else {
+				sum = a[small - i] - '0' + b[big - i] - '0' + carry;
+			}
+
+			if (sum >= 10) {
+				carry = 1;
+			}
+			else {
+				carry = 0;
+			}
+			result[i] = sum % 10 + '0';
+		}
+	}
+	if (carry == 1) {
+		result[i++] = carry + '0';
+	}
+	result[i] = '\0';
+
+	flag = 1;
+	for (j = i - 1; j >= 0; j--) {
+		if (result[j] == '0' && flag == 1) {
+			continue;
+		}
+		else if (result[j] != '0') {
+			flag = 0;
+		}
+		if (flag == 0) {
+			printf("%c", result[j]);
+		}
+	}
+
+	if (flag == 1) {
+		printf("0");
+	}
+
+	printf("\n");
+
+	return 0;
+}
