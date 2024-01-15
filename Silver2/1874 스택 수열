@@ -21,6 +21,7 @@ public class problem1874 {
 
         int count = 2;
         stackInt.push(1);
+        opList.add("+");
         int i = 0;
         while (!stackInt.isEmpty() || i < len) {
             if (!stackInt.isEmpty() && (list.get(i).equals(stackInt.peek()))) {
@@ -34,7 +35,7 @@ public class problem1874 {
                 opList.add("+");
             }
 
-            if (count > len && opList.size() < len) {
+            if (count > len + 1 && opList.size() > len + 1) {
                 System.out.println("NO");
                 flag = false;
                 break;
