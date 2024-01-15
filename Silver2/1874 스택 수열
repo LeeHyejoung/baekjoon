@@ -1,0 +1,55 @@
+import java.lang.reflect.Array;
+import java.util.Objects;
+import java.util.Stack;
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class problem1874 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Stack<Integer> stackInt = new Stack<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<String> opList = new ArrayList<>();
+
+        int len = sc.nextInt();
+        boolean flag = true;
+
+        for (int i = 0; i < len; i++) {
+            int input = sc.nextInt();
+            list.add(input);
+        }
+
+        int count = 2;
+        stackInt.push(1);
+        int i = 0;
+        while (!stackInt.isEmpty() || i < len) {
+            if (!stackInt.isEmpty() && (list.get(i).equals(stackInt.peek()))) {
+                int poped = stackInt.pop();
+                opList.add("-");
+                i++;
+            }
+            else {
+                stackInt.push(count);
+                count++;
+                opList.add("+");
+            }
+
+            if (count > len && opList.size() < len) {
+                System.out.println("NO");
+                flag = false;
+                break;
+            }
+        }
+
+        if (flag == true) {
+            while (!stackInt.isEmpty()) {
+                opList.add("-");
+            }
+
+            for (int j = 0; j < opList.size(); j++)
+                System.out.println(opList.get(j));
+        }
+
+        sc.close();
+    }
+}
