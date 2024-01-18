@@ -1,0 +1,38 @@
+import java.util.Objects;
+import java.util.Scanner;
+
+public class problem1152 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int count = 0;
+        int blankCount = 0;
+
+        String str = sc.nextLine();
+        for (int i = 0; i < str.length(); i++) {
+            if (Character.toString(str.charAt(i)).equals(" ")) {
+                if (i != 0 && i != str.length() - 1)
+                    count++;
+                else
+                    blankCount++;
+            }
+        }
+        int result;
+
+        if (count == 0) {
+            if (str.length() > blankCount)
+                result = count + 1;
+            else
+                result = count;
+        }
+        else {
+            if (blankCount == 0)
+                result = count + 1;
+            else
+                result = count - blankCount + 2;
+        }
+
+        System.out.println(result);
+
+        sc.close();
+    }
+}
