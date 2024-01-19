@@ -12,24 +12,18 @@ public class problem1152 {
             if (Character.toString(str.charAt(i)).equals(" ")) {
                 if (i != 0 && i != str.length() - 1)
                     count++;
-                else
+                else {
                     blankCount++;
+                    count++;
+                }
             }
         }
         int result;
 
-        if (count == 0) {
-            if (str.length() > blankCount)
-                result = count + 1;
-            else
-                result = count;
-        }
-        else {
-            if (blankCount == 0)
-                result = count + 1;
-            else
-                result = count - blankCount + 2;
-        }
+        if (blankCount == count && str.length() == blankCount)
+            result = 0;
+        else
+            result = count - blankCount + 1;
 
         System.out.println(result);
 
