@@ -1,0 +1,16 @@
+from collections import defaultdict
+
+m, n = map(int, input().split())
+
+dict_url = defaultdict()
+for i in range(m):
+    url, pw = map(str, input().split())
+    dict_url[url] = pw
+
+answer = []
+for i in range(n):
+    url = input()
+    answer.append(dict_url[url])
+
+for i in range(n):
+    print(answer[i])
