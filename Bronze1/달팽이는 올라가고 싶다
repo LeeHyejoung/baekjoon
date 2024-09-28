@@ -1,0 +1,10 @@
+import math
+
+s = input()
+strList = s.split(" ")
+a = int(strList[0])
+b = int(strList[1])
+v = int(strList[2])
+
+answer = math.ceil(((v - a) / (a - b)))+ 1
+print(answer)
