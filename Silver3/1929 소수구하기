@@ -1,0 +1,16 @@
+m, n = map(int, input().split())
+
+prime = [True] * (n + 1)
+prime[0] = False
+prime[1] = False
+
+for i in range(2, n + 1):
+    if prime[i] == True:
+        j = i + i
+        while j < n + 1:
+            prime[j] = False
+            j += i
+
+for i in range(m, n + 1):
+    if prime[i] == True:
+        print(i)
