@@ -1,0 +1,23 @@
+from collections import defaultdict
+
+n, m = map(int, input().split())
+
+name_dict = defaultdict(lambda : 0)
+
+for i in range(n):
+    name_dict[input()] += 1
+
+for i in range(m):
+    name_dict[input()] += 1
+
+name_dict = sorted(name_dict.items())
+
+count = 0
+for i in name_dict:
+    if (i[1] == 2):
+        count += 1
+
+print(count)
+for i in name_dict:
+    if (i[1] == 2):
+        print(i[0])
